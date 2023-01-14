@@ -13,7 +13,7 @@
 NAME = minishell
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -I .
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= push_swap.h
@@ -34,14 +34,14 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-%.o:%.c $(HEADER)
+%.o:%.c
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $< $(CFLAGS) -o $@ -L libft -l ft
 
 $(NAME): $(OBJS)
 	@make -C libft
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
-	@${CC} libft/libft.a ${FLAGS} ${SRCS} -o ${NAME}
+	${CC} ${FLAGS} ${OBJS} main.c -o ${NAME} -L libft -l ft
 
 
 clean:
