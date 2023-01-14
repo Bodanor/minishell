@@ -16,6 +16,8 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #define MAX_LINE_LENGTH 256
 
